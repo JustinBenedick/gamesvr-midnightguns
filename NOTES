@@ -1,0 +1,95 @@
+https://github.com/zitping/public-stuff
+
+${steamcmdlocation}steamcmd.sh +force_install_dir ${steamserverlocation}/midnightguns +login anonymous +app_update 1877600 +quit   (currently requires login.  
+
+zitping: 
+https://github.com/zitping/public-stuff
+GitHub
+GitHub - zitping/public-stuff
+Contribute to zitping/public-stuff development by creating an account on GitHub.
+
+
+[10:13 PM]zitping: 
+It works, mostly
+
+
+
+
+
+[10:13 PM]BEan [COYG], : 
+My life motto right there
+
+[10:13 PM]zitping: 
+Not really prepared to support it in any capacity so good luck
+
+[10:14 PM]zitping: 
+I think i need to commit some config file changes but it should get you started
+
+[10:14 PM]BEan [COYG], : 
+I cant do much  with it since I dont have the game. I  plan on digging in after quakecon and  our own lan party
+
+[10:16 PM]BEan [COYG], : 
+can the game server download on steamcmd via anonymous login?
+
+[10:16 PM]kway_side [OOA], : 
+i will force @mgli  and grilled chz to come
+
+[10:16 PM]kway_side [OOA], : 
+to the lan
+
+ [COYG], 
+[10:18 PM]tnk [FORK], : 
+im not sure. I think I logged in with my auth to download. 
+to get the game its as simple as 3bucks on patreon. 
+i'm not sure how the servers work with auth and if each client needs a steam client authenticated
+
+[10:18 PM]Isaiah: 
+This game will get the dope going I already know it
+
+
+
+
+ [COYG], 
+[10:19 PM]zitping: 
+Not yet
+
+ [FORK], 
+[10:19 PM]BEan [COYG], : 
+I will do that tomorrow.
+
+[10:20 PM]tnk [FORK], : 
+when u do ping here for a key
+
+
+
+
+[10:20 PM]zitping:
+
+
+
+
+[10:21 PM]BEan [COYG], : 
+any chance that can change, its a bit problematic for automation
+
+[10:21 PM]zitping:
+(Just to clarify i am a community member, not a dev)
+
+
+
+
+[10:22 PM]BEan [COYG], : 
+OK
+
+[10:22 PM]tnk [FORK], : 
+^
+
+ [COYG], 
+[10:22 PM]Classy: 
+The server files are packaged alongside the client files but there's no DRM associated with the files so they can be transferred if they need to be on a dedicated box or moved around.
+We use a master server outside of steam so hosting shouldn't require any associated steam logins to show up on our browser
+
+[10:23 PM]BEan [COYG], : 
+I am just thinking of dowloading and updating.  This is all good stuff and I will look at it tomorow.
+
+[10:24 PM]zitping: 
+but yea for now the podman stuff i have going uses the linuxgsm image for steamcmd to get the game, which does require a login since the game isn't public/f2p yet
