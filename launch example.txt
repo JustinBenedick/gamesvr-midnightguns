@@ -1,0 +1,1 @@
+`./midnightguns  -server -protocol MIDNIGHT +sv_port 27501 +map harlem +set hostname "Hostname" +sv_public 1 +exec mguns1.cfg`
