@@ -25,13 +25,12 @@ LABEL architecture="amd64" \
       com.lacledeslan.build-node="$BUILD_NODE" \
       maintainer="Laclede's LAN <contact@lacledeslan.com>" \
       org.opencontainers.image.created="$BUILD_DATE" \
-org.opencontainers.image.description="Midnight Guns Dedicated Server" \
-
+      org.opencontainers.image.description="Midnight Guns Dedicated Server" \
       org.opencontainers.image.revision="$GIT_REVISION" \
       org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-midnightguns" \
       org.opencontainers.image.vendor="Laclede's LAN"
 
-# The midgun server benefits from libtinfo.so.5, which is not available in Debian 12+ (Bookworm).
+# The midnightguns server benefits from libtinfo.so.5, which is not available in Debian 12+ (Bookworm).
 COPY ./dist/libtinfo.5_6.4.4/i386/lib/i386-linux-gnu/libtinfo.so.5.9 /lib/i386-linux-gnu/libtinfo.so.5
 
 RUN dpkg --add-architecture i386 && \
@@ -45,7 +44,7 @@ RUN dpkg --add-architecture i386 && \
         ln -s /app/bin/steamclient.so /app/.steam/sdk32/steamclient.so && \
         test -L /app/.steam/sdk32/steamclient.so && \
     # Make sure logs directory exists
-mkdir -p /app/hl2mp/logs && \
+mkdir -p /app/midguns/logs && \
     # Update username, home directory, and permissions for the midgun user
     useradd --home /app --gid root --system midgun && \
         chown midgun:root -R /app;

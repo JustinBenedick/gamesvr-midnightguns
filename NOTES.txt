@@ -2,6 +2,13 @@ https://github.com/zitping/public-stuff
 
 ${steamcmdlocation}steamcmd.sh +force_install_dir ${steamserverlocation}/midnightguns +login anonymous +app_update 1877600 +quit   (currently requires login.  
 
+
+Ports used
+    #  - '27950:27950'
+    #  - '27500:27500'
+    #  - '26000:26000'
+
+
 zitping: 
 https://github.com/zitping/public-stuff
 GitHub
