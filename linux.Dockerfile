@@ -1,12 +1,8 @@
-FROM lacledeslan/steamcmd AS hl2dm-downloader
+FROM lacledeslan/steamcmd AS midgun-downloader
 
-# Download Half-Life Deathmatch Source Dedicated Server
+# Download MightNight Guns Dedicated Server
 RUN mkdir --parents /output && \
     /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 232370 validate +quit;
-
-# Delete x64 bit libraries to save space, as the HL2DM server is 32-bit only
-RUN rm -rf /output/bin/linux64 && \
-    rm -rf /output/hl2mp/bin/linux64;
 
 
 #---------------------------------
@@ -24,13 +20,10 @@ LABEL architecture="amd64" \
       com.lacledeslan.build-node="$BUILD_NODE" \
       maintainer="Laclede's LAN <contact@lacledeslan.com>" \
       org.opencontainers.image.created="$BUILD_DATE" \
-      org.opencontainers.image.description="Half-Life 2 Deathmatch Dedicated Server" \
+      org.opencontainers.image.description="Midnight Guns Dedicated Server" \
       org.opencontainers.image.revision="$GIT_REVISION" \
-      org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-hl2dm" \
+      org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-midnightguns" \
       org.opencontainers.image.vendor="Laclede's LAN"
-
-# The HL2DM server benefits from libtinfo.so.5, which is not available in Debian 12+ (Bookworm).
-COPY ./dist/libtinfo.5_6.4.4/i386/lib/i386-linux-gnu/libtinfo.so.5.9 /lib/i386-linux-gnu/libtinfo.so.5
 
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
@@ -43,14 +36,14 @@ RUN dpkg --add-architecture i386 && \
         ln -s /app/bin/steamclient.so /app/.steam/sdk32/steamclient.so && \
         test -L /app/.steam/sdk32/steamclient.so && \
     # Make sure logs directory exists
-    mkdir -p /app/hl2mp/logs && \
-    # Update username, home directory, and permissions for the HL2DM user
-    useradd --home /app --gid root --system HL2DM && \
-        chown HL2DM:root -R /app;
+    mkdir -p /app/mguns/logs && \
+    # Update username, home directory, and permissions for the MIDGUN user
+    useradd --home /app --gid root --system MIDGUN && \
+        chown MIDGUN:root -R /app;
 
-COPY --chown=HL2DM:root --from=hl2dm-downloader /output /app
+COPY --chown=MIDGUN:root --from=midgun-downloader /output /app
 
-USER HL2DM
+USER MIDGUN
 
 WORKDIR /app
 
