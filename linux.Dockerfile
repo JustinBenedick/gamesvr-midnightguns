@@ -1,6 +1,6 @@
 FROM lacledeslan/steamcmd AS midgun-downloader
 
-# Download Half-Life Deathmatch Source Dedicated Server
+# Download MightNight Guns Dedicated Server
 RUN mkdir --parents /output && \
 #    /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 1877600 validate +quit;
     /app/steamcmd.sh +force_install_dir /output +login <USERIDHERE> <PASSWORD_HERE> +app_update 1877600 validate +quit
@@ -25,7 +25,8 @@ LABEL architecture="amd64" \
       com.lacledeslan.build-node="$BUILD_NODE" \
       maintainer="Laclede's LAN <contact@lacledeslan.com>" \
       org.opencontainers.image.created="$BUILD_DATE" \
-      org.opencontainers.image.description="Midnight guns Dedicated Server" \
+org.opencontainers.image.description="Midnight Guns Dedicated Server" \
+
       org.opencontainers.image.revision="$GIT_REVISION" \
       org.opencontainers.image.source="https://github.com/LacledesLAN/gamesvr-midnightguns" \
       org.opencontainers.image.vendor="Laclede's LAN"
@@ -44,7 +45,7 @@ RUN dpkg --add-architecture i386 && \
         ln -s /app/bin/steamclient.so /app/.steam/sdk32/steamclient.so && \
         test -L /app/.steam/sdk32/steamclient.so && \
     # Make sure logs directory exists
-    mkdir -p /app/hl2mp/logs && \
+mkdir -p /app/hl2mp/logs && \
     # Update username, home directory, and permissions for the midgun user
     useradd --home /app --gid root --system midgun && \
         chown midgun:root -R /app;
@@ -52,6 +53,7 @@ RUN dpkg --add-architecture i386 && \
 COPY --chown=midgun:root --from=midgun-downloader /output /app
 
 USER midgun
+
 
 WORKDIR /app
 
