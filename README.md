@@ -6,7 +6,7 @@ Midnight guns is a team based shooter based off the Quake 2 engine and id develo
 
 ===
 
-# !\[Midnight Guns screenshot](https://raw.githubusercontent.com/LacledesLAN/gamesvr-midnightguns/master/.misc/artwork1.jpg "Midnight Guns Screenshot")
+# !\[Midnight Guns screenshot](https://raw.githubusercontent.com/JustinBenedick/gamesvr-midnightguns/blob/main/.misc/artwork1.jpg "Midnight Guns Screenshot")
 
 # 
 
