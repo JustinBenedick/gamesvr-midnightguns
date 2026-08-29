@@ -1,1 +1,6 @@
 `./midnightguns  -server -protocol MIDNIGHT +sv_port 27501 +map harlem +set hostname "Hostname" +sv_public 1 +exec mguns1.cfg`
+
+
+
+docker build -f linux.Dockerfile -t test-midgun .
+docker run -it --rm --net=host test-midgun ./midnightguns  -server -protocol MIDNIGHT +sv_port 27501 +map harlem +set hostname "Hostname" +sv_public 1 +exec mguns1.cfg
