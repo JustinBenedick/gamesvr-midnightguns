@@ -1,14 +1,12 @@
 FROM lacledeslan/steamcmd AS midgun-downloader
 
 # Download MightNight Guns Dedicated Server
-RUN mkdir --parents /output && \
+#RUN mkdir --parents /output && \
 #    /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 1877600 validate +quit;
-    /app/steamcmd.sh +force_install_dir /output +login <USERIDHERE> <PASSWORD_HERE> +app_update 1877600 validate +quit
+#    /app/steamcmd.sh +force_install_dir /output +login username password +app_update 1877600 validate +quit
 
-# Delete x64 bit libraries to save space, as the midgun server is 32-bit only
-RUN rm -rf /output/bin/linux64 && \
-    rm -rf /output/hl2mp/bin/linux64;
 
+COPY /output /output
 
 #---------------------------------
 FROM debian:trixie-slim
@@ -31,7 +29,7 @@ LABEL architecture="amd64" \
       org.opencontainers.image.vendor="Laclede's LAN"
 
 # The midnightguns server benefits from libtinfo.so.5, which is not available in Debian 12+ (Bookworm).
-COPY ./dist/libtinfo.5_6.4.4/i386/lib/i386-linux-gnu/libtinfo.so.5.9 /lib/i386-linux-gnu/libtinfo.so.5
+# COPY ./dist/libtinfo.5_6.4.4/i386/lib/i386-linux-gnu/libtinfo.so.5.9 /lib/i386-linux-gnu/libtinfo.so.5
 
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
@@ -39,17 +37,21 @@ RUN dpkg --add-architecture i386 && \
             ca-certificates libsdl2-2.0-0:i386 libstdc++6:i386 && \
         apt-get clean && \
         rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
-    # Symlink the Steam client library to prevent srcds_run errors
-    mkdir -p /app/.steam/sdk32/ && \
-        ln -s /app/bin/steamclient.so /app/.steam/sdk32/steamclient.so && \
+    # Symlink the Steam client library to the SDK paths expected by the server
+    mkdir -p /app/.steam/sdk32 /app/.steam/sdk64 && \
+        ln -s /app/steamclient.so /app/.steam/sdk32/steamclient.so && \
+        ln -s /app/steamclient.so /app/.steam/sdk64/steamclient.so && \
         test -L /app/.steam/sdk32/steamclient.so && \
+        test -L /app/.steam/sdk64/steamclient.so && \
     # Make sure logs directory exists
-mkdir -p /app/midguns/logs && \
+mkdir -p /app/mguns/logs && \
     # Update username, home directory, and permissions for the midgun user
     useradd --home /app --gid root --system midgun && \
         chown midgun:root -R /app;
 
 COPY --chown=midgun:root --from=midgun-downloader /output /app
+# Use the SteamCMD client's current interface instead of the stale bundled copy.
+COPY --chown=midgun:root --from=midgun-downloader /app/linux64/steamclient.so /app/steamclient.so
 
 USER midgun
 
