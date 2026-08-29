@@ -12,11 +12,7 @@ Midnight guns is a team based shooter based off the Quake 2 engine and id develo
 
 # This repository is maintained by \[Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones
 
-# and used as a stock server. For examples of building a customized server from this Docker image browse its related
-
-# child-projects \[gamesvr-tf2-blindfrag](https://github.com/LacledesLAN/gamesvr-tf2-blindfrag) and
-
-# \[gamesvr-tf2-freeplay](https://github.com/LacledesLAN/gamesvr-tf2-freeplay). If any documentation is unclear or it has
+# and used as a stock server. If any documentation is unclear or it has
 
 # any issues please see \[CONTRIBUTING.md](./CONTRIBUTING.md).
 
