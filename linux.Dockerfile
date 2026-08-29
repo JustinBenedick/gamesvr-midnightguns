@@ -5,7 +5,7 @@ FROM lacledeslan/steamcmd AS midgun-downloader
 #    /app/steamcmd.sh +force_install_dir /output +login anonymous +app_update 1877600 validate +quit;
 #    /app/steamcmd.sh +force_install_dir /output +login username password +app_update 1877600 validate +quit
 
-
+#This is a temporary solution until I can download Midnightguns via steamcmd without login.  Just download midnight guns server into the output directly outside of docker.
 COPY /output /output
 
 #---------------------------------
