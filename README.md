@@ -1,6 +1,6 @@
 # MidnightGuns Dedicated Server in Docker
 
-Midnight Guns is a team-based shooter based on the Quake 2 engine and developed by [TastySpleen](http://tastyspleen.net/).
+Midnight Guns is a team-based shooter based on the [FTEQW](https://github.com/fte-team/fteqw) engine and developed by [TastySpleen](http://tastyspleen.net/).
 
 ![Midnight Guns screenshot](https://raw.githubusercontent.com/JustinBenedick/gamesvr-midnightguns/main/.misc/artwork1.jpg "Midnight Guns Screenshot")
 
