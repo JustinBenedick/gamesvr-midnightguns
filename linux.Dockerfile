@@ -34,7 +34,7 @@ LABEL architecture="amd64" \
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
         apt-get install -y --no-install-recommends --no-install-suggests --no-upgrade \
-            ca-certificates libsdl2-2.0-0:i386 libstdc++6:i386 && \
+            ca-certificates libsdl2-2.0-0:i386 libstdc++6:i386 wget && \
         apt-get clean && \
         rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
     # Symlink the Steam client library to the SDK paths expected by the server
@@ -52,6 +52,13 @@ mkdir -p /app/mguns/logs && \
 COPY --chown=midgun:root --from=midgun-downloader /output /app
 # Use the SteamCMD client's current interface instead of the stale bundled copy.
 COPY --chown=midgun:root --from=midgun-downloader /app/linux64/steamclient.so /app/steamclient.so
+
+# Download Midnight Guns maps from the map depot.
+RUN mkdir -p /app/mguns/maps /tmp/midnight-guns-map-depot && \
+    wget --quiet --output-document=- https://github.com/Jehar/midnight-guns-map-depot/archive/refs/heads/main.tar.gz | \
+    tar --extract --gzip --directory=/tmp/midnight-guns-map-depot && \
+    find /tmp/midnight-guns-map-depot/midnight-guns-map-depot-main/maps -type f \( -name '*.pk3' -o -name '*.map' \) -exec cp -- {} /app/mguns/maps/ \; && \
+    rm -rf /tmp/midnight-guns-map-depot
 
 USER midgun
 
